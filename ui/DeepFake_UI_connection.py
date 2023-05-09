@@ -14,10 +14,10 @@ from database import db_functions
 import hashlib
 import binascii
 from PyQt5.QtGui import QRegExpValidator
-
+import icons_rc
 
 class InferenceThread(QThread):
-    inferenceCompleted = pyqtSignal(str)
+    inferenceCompleted = pyqtSignal(dict)
     progressUpdate = pyqtSignal(int)
 
     def __init__(self):
@@ -25,24 +25,62 @@ class InferenceThread(QThread):
         self.parameter = None
         self.file_path = None
 
+    def closest_to_zero_or_one(self, num1, num2):
+        zero_dist1 = abs(num1 - 0)
+        one_dist1 = abs(num1 - 1)
+        zero_dist2 = abs(num2 - 0)
+        one_dist2 = abs(num2 - 1)
+
+        min_dist = min(zero_dist1, one_dist1, zero_dist2, one_dist2)
+
+        if min_dist == zero_dist1:
+            return num1
+        elif min_dist == one_dist1:
+            return num1
+        elif min_dist == zero_dist2:
+            return num2
+        else:
+            return num2
+
     def run(self):
         try:
+            result_dict = {}
+            result_str = ''
+            model_cnn_result = -1
+            model_vt_result = -1
             if self.parameter == 0:
                 model_vt_result = visionTransformerPredict(self.file_path)
-                result = model_vt_result
+                result = float(model_vt_result)
+                if result >= 0.5:
+                    result_str = "Sahte"
+                else:
+                    result_str = "Gerçek"
             elif self.parameter == 1:
                 model_cnn_result = inference(self.file_path)
-                result = model_cnn_result["label"]
+                model_cnn_result = model_cnn_result["label"]
+                if model_cnn_result >= 0.5:
+                    result_str = "Sahte"
+                else:
+                    result_str = "Gerçek"
             elif self.parameter == 2:
                 model_vt_result = visionTransformerPredict(self.file_path)
                 model_cnn_result = inference(self.file_path)
-                result = str(model_vt_result)  +','+ str(model_cnn_result["label"])
-
+                model_cnn_result = model_cnn_result["label"]
+                #result = str(model_vt_result)  +','+ str(model_cnn_result["label"])
+                if model_cnn_result >= 0.5 and float(model_vt_result) >= 0.5:
+                    result_str = "Sahte"
+                elif model_cnn_result < 0.5 and float(model_vt_result) < 0.5:
+                    result_str = "Gerçek"
+                elif self.closest_to_zero_or_one(model_cnn_result, float(model_vt_result)) >= 0.5:
+                    result_str = "Sahte"
+                else:
+                    result_str = "Gerçek"
             else:
                 return 0
+            result_dict = {"result": result_str, "cnn": model_cnn_result, "vt": float(model_vt_result)}
         except:
             print("run")
-        self.inferenceCompleted.emit(str(result))
+        self.inferenceCompleted.emit(result_dict)
 
 
 class LoginWindow(QMainWindow):
@@ -54,7 +92,6 @@ class LoginWindow(QMainWindow):
         self.window_main = None
         self.window_register = None
         self.make_connection()
-
 
     def login(self):
         username = self.ui.line_edit_kullanici_adi.text()
@@ -76,10 +113,11 @@ class LoginWindow(QMainWindow):
             self.close()
             self.window_register.show()
 
-
     def make_connection(self):
         self.ui.push_button_giris_yap.clicked.connect(self.login)
         self.ui.push_button_kayit_ol.clicked.connect(self.register_window)
+
+
 
 
 class RegisterWindow(QMainWindow):
@@ -138,6 +176,16 @@ class RegisterWindow(QMainWindow):
 
     def make_connection(self):
         self.ui.push_button_kayit_ol.clicked.connect(self.register)
+        self.ui.push_button_geri.clicked.connect(self.back)
+
+    def back(self):
+        self.window_login = LoginWindow(self.connection)
+        if self.window_login.isVisible():
+            self.window_login.hide()
+        else:
+            self.close()
+            self.window_login.show()
+
 
 
 class MainWindow(QMainWindow):
@@ -226,6 +274,31 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print('Failed to delete  Reason: ' + str(e))
 
-    def showInferenceResult(self, result):
-        self.ui.labelResult.setText(result)
+    def showInferenceResult(self, result_dict):
+        #self.ui.labelResult.setText(result)
+        result_fake = ''
+        result_real = ''
+        self.ui.labelFake.setStyleSheet("background-color: rgb(4, 18, 27);color: red; border: 2px solid;color: rgb(255, 0, 0);padding: 5px;border-radius: 10px;border-color: red;")
+        self.ui.labelReal.setStyleSheet("background-color: rgb(4, 18, 27);color: green; border: 2px solid;padding: 5px;color: rgb(0, 170, 0);border-radius: 10px;opacity: 200;border-color: green;")
 
+        if result_dict["cnn"] >= 0.5 and result_dict["cnn"] != float(-1):
+            result_fake += "CNN -> %{0:0.3f}\n".format(result_dict["cnn"])
+        elif result_dict["cnn"] != float(-1):
+            result_real += "CNN -> %{0:0.3f}\n".format(result_dict["cnn"])
+
+        if result_dict["vt"] >= 0.5 and result_dict["vt"] != float(-1):
+            result_fake += "ViT -> %{0:0.3f}\n".format(result_dict["vt"])
+        elif result_dict["vt"] != float(-1):
+            result_real += "ViT -> %{0:0.3f}\n".format(result_dict["vt"])
+
+        if result_fake != '':
+            self.ui.labelFake_result.setText(result_fake)
+            self.ui.labelFake_result.setVisible(True)
+        if result_real != '':
+            self.ui.labelReal_result.setText(result_real)
+            self.ui.labelReal_result.setVisible(True)
+
+        if result_dict["result"] == "Sahte":
+            self.ui.labelFake.setStyleSheet("background-color: red;color: white;")
+        else:
+            self.ui.labelReal.setStyleSheet("background-color: green;color: white;")

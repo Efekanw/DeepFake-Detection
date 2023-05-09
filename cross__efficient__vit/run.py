@@ -96,7 +96,8 @@ def main(model_path, config, file_path, batch_size=32):
         video_pred = video_faces_preds[0]
     print("RESULT PREDICTION---")
     print(video_pred)
-    if float(video_pred) > 0.5:
-        return "Fake"
-    else:
-        return "Real"
+    return video_pred
+    # if float(video_pred) > 0.5:
+    #     return "Fake"
+    # else:
+    #     return "Real"

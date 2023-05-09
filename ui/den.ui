@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>916</width>
-    <height>828</height>
+    <width>910</width>
+    <height>850</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>916</width>
-    <height>828</height>
+    <width>910</width>
+    <height>850</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>916</width>
-    <height>848</height>
+    <width>910</width>
+    <height>850</height>
    </size>
   </property>
   <property name="cursor">
@@ -32,228 +32,159 @@
    <string>Deep Fake Detection</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: rgb(4, 18, 27);
+color: rgb(255, 255, 255);
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widgetAll" native="true">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(4, 18, 27);
+QMenuBar#menubar:hover{
+	padding-left:5px;
+	padding-top:5px;
+	color: rgb(2, 10, 16);
+}</string>
+   </property>
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>911</width>
-      <height>791</height>
+      <width>916</width>
+      <height>828</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(51, 59, 71);
+     <string notr="true">background-color: rgb(4, 18, 27);
+color: rgb(255, 255, 255);
+border-color:NONE;
+color: rgb(2, 10, 16);
+opacity: 200;
 </string>
     </property>
-    <widget class="QWidget" name="widgetVideo" native="true">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>881</width>
-       <height>461</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-border-radius:20px;
-</string>
-     </property>
-    </widget>
-    <widget class="QScrollArea" name="scrollArea">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>640</y>
-       <width>231</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tabCikarim">
+     <attribute name="title">
+      <string>Çıkarım</string>
+     </attribute>
+     <widget class="QWidget" name="widgetAll" native="true">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>229</width>
-        <height>69</height>
+        <width>911</width>
+        <height>781</height>
        </rect>
       </property>
-      <widget class="QCheckBox" name="check_box_vision_transformer">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(4, 18, 27);</string>
+      </property>
+      <widget class="QWidget" name="widgetVideo" native="true">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>211</width>
-         <height>17</height>
+         <width>881</width>
+         <height>461</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>EfficientNet and Vision Transformers</string>
+        <string notr="true">background-color: rgb(4, 18, 27);
+background-color: rgb(2, 10, 16);
+border-radius:20px;
+</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="check_box_cnn">
+      <widget class="QScrollArea" name="scrollArea">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>70</width>
-         <height>17</height>
+         <x>50</x>
+         <y>580</y>
+         <width>281</width>
+         <height>111</height>
         </rect>
        </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);
+</string>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>267</width>
+          <height>97</height>
+         </rect>
+        </property>
+        <widget class="QCheckBox" name="check_box_vision_transformer">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>191</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Conv. Cross ViT EfficientNet B0</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="check_box_cnn">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Selim EfficientNet B7</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widgetButtons" native="true">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>490</y>
+         <width>641</width>
+         <height>61</height>
+        </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>CNN</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QLabel" name="labelResult">
-     <property name="geometry">
-      <rect>
-       <x>440</x>
-       <y>600</y>
-       <width>121</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color:rgb(255, 255, 255)</string>
-     </property>
-     <property name="text">
-      <string>2</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBarVisionTransformer">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>720</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_Resimler">
-     <property name="geometry">
-      <rect>
-       <x>650</x>
-       <y>490</y>
-       <width>231</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>Çıkarılan Resimler</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBoxResimler">
-     <property name="geometry">
-      <rect>
-       <x>680</x>
-       <y>530</y>
-       <width>171</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonInference">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>510</y>
-       <width>81</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#pushButtonInference{
-	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
-}
-QPushButton#pushButtonInference:hover{
-	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
-}
-QPushButton#pushButtonInference:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color:rgba(105,118,132,200);
-}
-border: 1px solid black;
-border-radius:5px;</string>
-     </property>
-     <property name="text">
-      <string>Çıkarım</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="widgetButtons" native="true">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>490</y>
-       <width>321</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#pushButtonOynat{
+        <string notr="true">QPushButton#pushButtonOynat{
 	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
 }
 QPushButton#pushButtonOynat:hover{
@@ -286,75 +217,436 @@ QPushButton#pushButtonDuraklat:pressed{
 	padding-top:5px;
 	background-color:rgba(105,118,132,200);
 }
+QPushButton#pushButtonInference{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButtonInference:hover{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButtonInference:pressed{
+    padding-left:5px;
+    padding-top:5px;
+    background-color:rgba(105,118,132,200);
+}
+border: 1px solid black;
+border-radius:5px;
 
 </string>
-     </property>
-     <widget class="QPushButton" name="pushButtonOynat">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>81</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="text">
-       <string>OYNAT</string>
-      </property>
+       </property>
+       <widget class="QPushButton" name="pushButtonOynat">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>81</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>OYNAT</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonDuraklat">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>10</y>
+          <width>81</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>DURAKLAT</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonDurdur">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>10</y>
+          <width>81</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>DURDUR</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonInference">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>10</y>
+          <width>81</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>Çıkarım</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBoxSonuc">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>490</y>
+         <width>361</width>
+         <height>291</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="labelFake">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>51</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+color: rgb(255, 0, 0);
+padding: 5px;
+border-radius: 10px;
+border-color: red;</string>
+        </property>
+        <property name="text">
+         <string>FAKE</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>160</y>
+          <width>51</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+padding: 5px;
+color: rgb(0, 170, 0);
+border-radius: 10px;
+opacity: 200;
+border-color: green;</string>
+        </property>
+        <property name="text">
+         <string>REAL</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelFake1">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>10</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+color: rgb(255, 255, 255);
+padding: 5px;
+border-radius: 10px;
+border-color: red;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelFake2">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>10</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+color: rgb(255, 255, 255);
+padding: 5px;
+border-radius: 10px;
+border-color: red;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelFake3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>80</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+color: rgb(255, 255, 255);
+padding: 5px;
+border-radius: 10px;
+border-color: red;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelFake4">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>80</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+color: rgb(255, 255, 255);
+padding: 5px;
+border-radius: 10px;
+border-color: red;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal1">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>170</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+padding: 5px;
+color: rgb(0, 170, 0);
+border-radius: 10px;
+opacity: 200;
+border-color: green;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal2">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>170</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+padding: 5px;
+color: rgb(0, 170, 0);
+border-radius: 10px;
+opacity: 200;
+border-color: green;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>230</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+padding: 5px;
+color: rgb(0, 170, 0);
+border-radius: 10px;
+opacity: 200;
+border-color: green;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal4">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>230</y>
+          <width>91</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid;
+padding: 5px;
+color: rgb(0, 170, 0);
+border-radius: 10px;
+opacity: 200;
+border-color: green;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelFake_result">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>50</y>
+          <width>81</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>7</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ViT -&gt; %{0:0.3f}</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelReal_result">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>200</y>
+          <width>81</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>7</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>CNN -&gt; %0.543</string>
+        </property>
+       </widget>
+      </widget>
+      <zorder>scrollArea</zorder>
+      <zorder>widgetButtons</zorder>
+      <zorder>widgetVideo</zorder>
+      <zorder>groupBoxSonuc</zorder>
      </widget>
-     <widget class="QPushButton" name="pushButtonDuraklat">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>10</y>
-        <width>81</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="text">
-       <string>DURAKLAT</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonDurdur">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>10</y>
-        <width>81</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="text">
-       <string>DURDUR</string>
-      </property>
-     </widget>
+    </widget>
+    <widget class="QWidget" name="tabEgitim">
+     <attribute name="title">
+      <string>Eğitim</string>
+     </attribute>
     </widget>
    </widget>
   </widget>
@@ -364,7 +656,7 @@ QPushButton#pushButtonDuraklat:pressed{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>916</width>
+     <width>910</width>
      <height>21</height>
     </rect>
    </property>
