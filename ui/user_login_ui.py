@@ -142,7 +142,7 @@ class Ui_UserLogin(object):
         self.push_button_kayit_ol.setText(_translate("UserLogin", "Kayıt Ol"))
         self.line_edit_kullanici_adi.setPlaceholderText(_translate("UserLogin", "Kullanıcı Adı"))
         self.line_edit_sifre.setPlaceholderText(_translate("UserLogin", "Şifre"))
-#import ui.icons_rc
+from ui import icons_rc
 
 
 if __name__ == "__main__":

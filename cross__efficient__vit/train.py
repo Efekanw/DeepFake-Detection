@@ -12,20 +12,20 @@ from multiprocessing.pool import Pool
 from functools import partial
 from multiprocessing import Manager
 from progress.bar import ChargingBar
-from cross_efficient_vit import CrossEfficientViT
+from cross__efficient__vit.cross_efficient_vit import CrossEfficientViT
 import uuid
 from torch.utils.data import DataLoader, TensorDataset, Dataset
 from sklearn.metrics import accuracy_score
 import cv2
-from transforms.albu import IsotropicResize
+from cross__efficient__vit.transforms.albu import IsotropicResize
 import glob
 import pandas as pd
 from tqdm import tqdm
-from utils import get_method, check_correct, resize, shuffle_dataset, get_n_params
+from cross__efficient__vit.utils import get_method, check_correct, resize, shuffle_dataset, get_n_params
 from sklearn.utils.class_weight import compute_class_weight 
 from torch.optim import lr_scheduler
 import collections
-from deepfakes_dataset import DeepFakesDataset
+from cross__efficient__vit.deepfakes_dataset import DeepFakesDataset
 import math
 import yaml
 import argparse
