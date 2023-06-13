@@ -10,7 +10,7 @@ def check_login(connection, username, password):
         cursor = connection.cursor()
         cursor.execute("SELECT password, id FROM users WHERE username = %s", (username,))
         result = cursor.fetchone()
-
+        print(result)
         if result:
             # parolayı hash'leme ve veritabanındaki hash ile karşılaştırma
             stored_password = bytes(result[0])

@@ -6,7 +6,7 @@ from facedetection_ui import Ui_DeepFakeDetection
 from ui.user_login_ui import Ui_UserLogin
 from ui.user_register_ui import Ui_UserRegister
 from PyQt5.QtCore import QThread, pyqtSignal
-from cross__efficient__vit.vision_transformer import visionTransformerPredict
+from cross__efficient__vit.vision_transformer import visionTransformerPredict, visionTransformerTrain
 from CNN.predict import inference
 import os
 import shutil
@@ -15,6 +15,29 @@ import hashlib
 import binascii
 from PyQt5.QtGui import QRegExpValidator
 import icons_rc
+
+class TrainThread(QThread):
+    trainCompleted = pyqtSignal(dict)
+    progressUpdate = pyqtSignal(int)
+
+    def __init__(self):
+        super().__init__()
+        self.num_epochs = None
+        self.training_params = None
+        self.model_name = None
+        self.patience = None
+        self.file_path = None
+        self.train_path = None
+        self.val_path = None
+        self.test_path = None
+
+    def run(self):
+        try:
+            result_test = visionTransformerTrain(num_epochs=self.num_epochs, training_params=self.training_params, model_name=self.model_name, train_path=self.train_path, val_path=self.val_path, test_path=self.test_path)
+        except:
+            print("train_test")
+        self.trainCompleted.emit(result_test)
+
 
 class InferenceThread(QThread):
     inferenceCompleted = pyqtSignal(dict)
@@ -94,16 +117,22 @@ class LoginWindow(QMainWindow):
         self.make_connection()
 
     def login(self):
-        username = self.ui.line_edit_kullanici_adi.text()
-        password = self.ui.line_edit_sifre.text()
-        userid = db_functions.check_login(self.connection, username, password)
-        self.window_main = MainWindow(self.connection)
-        if userid != False:
-            if self.window_main.isVisible():
-                self.window_main.hide()
-            else:
-                self.close()
-                self.window_main.show()
+        try:
+            username = self.ui.line_edit_kullanici_adi.text()
+            password = self.ui.line_edit_sifre.text()
+            print(username)
+            print(password)
+            userid = db_functions.check_login(self.connection, username, password)
+            print(userid)
+            self.window_main = MainWindow(self.connection)
+            if userid != False:
+                if self.window_main.isVisible():
+                    self.window_main.hide()
+                else:
+                    self.close()
+                    self.window_main.show()
+        except:
+            print("login error")
 
     def register_window(self):
         self.window_register = RegisterWindow(self.connection)
@@ -199,9 +228,22 @@ class MainWindow(QMainWindow):
         self.setup()
         self.makeConnections()
         self.inferenceThread = InferenceThread()
+        self.trainThread = TrainThread()
         self.inferenceThread.inferenceCompleted.connect(self.showInferenceResult)
+        self.trainThread.trainCompleted.connect(self.showTrainResult)
         self.inferenceThread.progressUpdate.connect(self.updateProgressBar)
         self.file_path = ''
+        self.train_path = ''
+        self.val_path = ''
+        self.test_path = ''
+
+    def showTrainResult(self, result_test):
+        self.ui.labelAccuracySonuc.clear()
+        self.ui.labelLossSonuc.clear()
+        self.ui.labelF1ScoreSonuc.clear()
+        self.ui.labelAccuracySonuc.setText(result_test["accuracy"])
+        self.ui.labelLossSonuc.setText(result_test["loss"])
+        self.ui.labelF1ScoreSonuc.setText(result_test["f1"])
 
     def updateProgressBar(self, value):
         self.ui.progressBarVisionTransformer.setValue(value)
@@ -230,6 +272,20 @@ class MainWindow(QMainWindow):
         self.ui.pushButtonDurdur.clicked.connect(self.mediaPlayer.stop)
         #self.ui.pushButtonInference.clicked.connect(self.inference)
         self.ui.pushButtonInference.clicked.connect(self.runInference)
+        #self.ui.actionVeri_seti_sec.triggered.connect(self.onActionTrainAc)
+        self.ui.actionTraining_veriseti_sec.triggered.connect(self.onActionTrainAc)
+        self.ui.actionValidation_veriseti_sec.triggered.connect(self.onActionValAc)
+        self.ui.actionTest_veriseti_sec.triggered.connect(self.onActionTestAc)
+        self.ui.pushButtonEgitim.clicked.connect(self.runTrain)
+
+    def onActionTestAc(self):
+        path = QFileDialog.getExistingDirectory(self, "Test Veri Seti Seç", "/")
+        print(path)
+        filepath = path
+        if filepath == "":
+            return
+        self.test_path = filepath
+        print(filepath)
 
     def onActionAcTriggered(self):
         path = QFileDialog.getOpenFileName(self, "Video Aç", "/")
@@ -240,9 +296,28 @@ class MainWindow(QMainWindow):
         self.mediaPlayer.play()
         self.file_path = filepath
 
+    def onActionValAc(self):
+        path = QFileDialog.getExistingDirectory(self, "Validation Veri Seti Seç", "/")
+        print(path)
+        filepath = path
+        if filepath == "":
+            return
+        self.val_path = filepath
+        print(filepath)
+
+    def onActionTrainAc(self):
+        path = QFileDialog.getExistingDirectory(self, "Eğitim Veri Seti Seç", "/")
+        print(path)
+        filepath = path
+        if filepath == "":
+            return
+        self.train_path = filepath
+        print(filepath)
+
     def runInference(self):
         self.clear_folder()
-
+        self.ui.labelFake_result.clear()
+        self.ui.labelReal_result.clear()
         self.inferenceThread.file_path = self.file_path
         if not self.ui.check_box_vision_transformer.isChecked() and not self.ui.check_box_cnn.isChecked():
             msgBox = QMessageBox()
@@ -302,3 +377,20 @@ class MainWindow(QMainWindow):
             self.ui.labelFake.setStyleSheet("background-color: red;color: white;")
         else:
             self.ui.labelReal.setStyleSheet("background-color: green;color: white;")
+
+
+    def runTrain(self):
+        self.trainThread.model_name = self.ui.lineEditModelName.text() + '.pth'
+        self.trainThread.num_epochs = int(self.ui.lineEditEpochViT.text())
+        self.trainThread.patience = int(self.ui.lineEditPatienceViT.text())
+        training_params = {"bs": int(self.ui.lineEditBatchViT.text()),
+                           "lr": float(self.ui.lineEditLearningRateViT.text()),
+                           "weight_decay": float(self.ui.lineEditWeightDecayViT.text()),
+                           "gamma": float(self.ui.lineEditGamaViT.text()),
+                           "step_size": int(self.ui.lineEditStepSizeViT.text())
+                           }
+        self.trainThread.training_params = training_params
+        self.trainThread.train_path = self.train_path
+        self.trainThread.val_path = self.val_path
+        self.trainThread.test_path = self.test_path
+        self.trainThread.start()

@@ -28,12 +28,13 @@ from utils import custom_round, custom_video_round
 #########################
 
 MODELS_DIR = "models"
-BASE_DIR = "./"
-DATA_DIR = os.path.join(BASE_DIR, "dataset")
-TEST_DIR = os.path.join(DATA_DIR, "test_set")
-OUTPUT_DIR = os.path.join(MODELS_DIR, "tests")
-
-TEST_LABELS_PATH = os.path.join(BASE_DIR, "dataset/dfdc_test_labels.csv")
+BASE_DIR = "../"
+DATA_DIR = "run"
+TEST_DIR = DATA_DIR + '/' + "test_crops"
+OUTPUT_DIR = "models" + '/' + "tests"
+#OUTPUT_DIR = os.path.join(MODELS_DIR, "tests")
+TEST_LABELS_PATH = DATA_DIR + '/' + "dfdc_test_labels.txt"
+#TEST_LABELS_PATH = os.path.join(BASE_DIR, "dataset/dfdc_test_labels.csv")
 
 #########################
 ####### UTILITIES #######
@@ -77,7 +78,7 @@ def save_roc_curves(correct_labels, preds, model_name, accuracy, loss, f1):
   plt.ylabel('True positive rate')
   plt.title('ROC curve')
   plt.legend(loc='best')
-  plt.savefig(os.path.join(OUTPUT_DIR, model_name +  "_" + opt.dataset + "_acc" + str(accuracy*100) + "_loss"+str(loss)+"_f1"+str(f1)+".jpg"))
+  plt.savefig(os.path.join(OUTPUT_DIR, model_name + "_acc" + str(accuracy*100) + "_loss"+str(loss)+"_f1"+str(f1)+".jpg"))
   plt.clf()
 
 
@@ -88,7 +89,7 @@ def read_frames(video_path, videos, frames_per_video, config, run):
     #if "Original" in video_path:
     #    label = 0.
     if run == 0:
-        test_df = pd.DataFrame(pd.read_csv(TEST_LABELS_PATH))
+        test_df = pd.read_csv(TEST_LABELS_PATH, sep=",")
         video_folder_name = os.path.basename(video_path)
         video_key = video_folder_name + ".mp4"
         #label = test_df.loc[test_df['filename'] == video_key]['label'].values[0]
@@ -148,81 +149,78 @@ def create_base_transform(size):
 
 
 # Main body
-if __name__ == "__main__":
+def main(config, batch_size, model_name, model_path="cross_efficient_vit.pth"):
     
-    parser = argparse.ArgumentParser()
+    # parser = argparse.ArgumentParser()
+    #
+    # # parser.add_argument('--workers', default=0, type=int,
+    # #                     help='Number of data loader workers.')
+    # parser.add_argument('--model_path', default='', type=str, metavar='PATH',
+    #                     help='Path to model checkpoint (default: none).')
+    # # parser.add_argument('--dataset', type=str, default='DFDC',
+    # #                     help="Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|DFDC)")
+    # # parser.add_argument('--max_videos', type=int, default=-1,
+    # #                     help="Maximum number of videos to use for training (default: all).")
+    # # parser.add_argument('--config', type=str,
+    # #                     help="Which configuration to use. See into 'config' folder.")
+    # # parser.add_argument('--efficient_net', type=int, default=0,
+    # #                     help="Which EfficientNet version to use (0 or 7, default: 0)")
+    # parser.add_argument('--frames_per_video', type=int, default=30,
+    #                     help="How many equidistant frames for each video (default: 30)")
+    # parser.add_argument('--batch_size', type=int, default=32,
+    #                     help="Batch size (default: 32)")
+    #
+    # opt = parser.parse_args()
+    # print(opt)
     
-    parser.add_argument('--workers', default=0, type=int,
-                        help='Number of data loader workers.')
-    parser.add_argument('--model_path', default='', type=str, metavar='PATH',
-                        help='Path to model checkpoint (default: none).')
-    parser.add_argument('--dataset', type=str, default='DFDC', 
-                        help="Which dataset to use (Deepfakes|Face2Face|FaceShifter|FaceSwap|NeuralTextures|DFDC)")
-    parser.add_argument('--max_videos', type=int, default=-1, 
-                        help="Maximum number of videos to use for training (default: all).")
-    parser.add_argument('--config', type=str, 
-                        help="Which configuration to use. See into 'config' folder.")
-    parser.add_argument('--efficient_net', type=int, default=0, 
-                        help="Which EfficientNet version to use (0 or 7, default: 0)")
-    parser.add_argument('--frames_per_video', type=int, default=30, 
-                        help="How many equidistant frames for each video (default: 30)")
-    parser.add_argument('--batch_size', type=int, default=32, 
-                        help="Batch size (default: 32)")
-    
-    opt = parser.parse_args()
-    print(opt)
-    
-    with open(opt.config, 'r') as ymlfile:
+    with open(config, 'r') as ymlfile:
         config = yaml.safe_load(ymlfile)
  
         
-    if os.path.exists(opt.model_path):
+    if os.path.exists(model_path):
         model = CrossEfficientViT(config=config)
-        model.load_state_dict(torch.load(opt.model_path, map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
         model.eval()
         #model = model.cuda()
     else:
         print("No model found.")
         exit()
 
-    model_name = os.path.basename(opt.model_path)
-
+    #model_name = os.path.basename(opt.model_path)
+    model_name = model_name
+    #DATA_DIR = data_path
 
     #########################
     ####### EXECUTION #######
     #########################
 
 
-    OUTPUT_DIR = os.path.join(OUTPUT_DIR, opt.dataset)
+    #OUTPUT_DIR = os.path.join(OUTPUT_DIR, opt.dataset)
     
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+    # if not os.path.exists(OUTPUT_DIR):
+    #     os.makedirs(OUTPUT_DIR)
    
 
 
     NUM_CLASSES = 1
     preds = []
 
-    mgr = Manager()
     paths = []
-    videos = mgr.list()
+    videos = []
 
-    if opt.dataset != "DFDC":
-        folders = ["Original", opt.dataset]
-    else:
-        folders = [opt.dataset]
 
     # Read all videos paths
-    for folder in folders:
-        method_folder = os.path.join(TEST_DIR, folder)  
-        for index, video_folder in enumerate(os.listdir(method_folder)):
-            paths.append(os.path.join(method_folder, video_folder))
+    for index, video_folder in enumerate(os.listdir(TEST_DIR)):
+        paths.append(os.path.join(TEST_DIR, video_folder))
 
     # Read faces
-    with Pool(processes=cpu_count()-1) as p:
-        with tqdm(total=len(paths)) as pbar:
-            for v in p.imap_unordered(partial(read_frames, videos=videos, opt=opt, config=config, run=0),paths):
-                pbar.update()
+    # with Pool(processes=cpu_count()-1) as p:
+    #     with tqdm(total=len(paths)) as pbar:
+    #         for v in p.imap_unordered(partial(read_frames, videos=videos, config=config, run=0),paths):
+    #             pbar.update()
+
+    for path in paths:
+        read_frames(video_path=path, videos=videos, config=config, run=0, frames_per_video=30)
 
     video_names = np.asarray([row[2] for row in videos])
     correct_test_labels = np.asarray([row[1] for row in videos])
@@ -233,7 +231,7 @@ if __name__ == "__main__":
     # Perform prediction
     bar = Bar('Predicting', max=len(videos))
 
-    f = open(opt.dataset + "_" + model_name + "_labels.txt", "w+")
+    f = open(OUTPUT_DIR+ "/" + "_" + model_name + "_labels.txt", "w+")
     for index, video in enumerate(videos):
         video_faces_preds = []
         video_name = video_names[index]
@@ -241,8 +239,8 @@ if __name__ == "__main__":
         for key in video:
             faces_preds = []
             video_faces = video[key]
-            for i in range(0, len(video_faces), opt.batch_size):
-                faces = video_faces[i:i+opt.batch_size]
+            for i in range(0, len(video_faces), batch_size):
+                faces = video_faces[i:i+batch_size]
                 faces = torch.tensor(np.asarray(faces))
                 if faces.shape[0] == 0:
                     continue
@@ -290,3 +288,5 @@ if __name__ == "__main__":
     print(model_name, "Test Accuracy:", accuracy, "Loss:", loss, "F1", f1)
     save_roc_curves(correct_test_labels, preds, model_name, accuracy, loss, f1)
     save_confusion_matrix(metrics.confusion_matrix(correct_test_labels,custom_round(np.asarray(preds))))
+    result_dict = {"accuracy": accuracy, "loss": loss, "f1": f1}
+    return result_dict
