@@ -1,4 +1,4 @@
-import detect_faces
+from cross__efficient__vit.preprocessing import detect_faces
 import os
 
 

@@ -2,11 +2,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtMultimedia import *
 from PyQt5.QtMultimediaWidgets import *
-from facedetection_ui import Ui_DeepFakeDetection
+from ui.facedetection_ui import Ui_DeepFakeDetection
 from ui.user_login_ui import Ui_UserLogin
 from ui.user_register_ui import Ui_UserRegister
 from PyQt5.QtCore import QThread, pyqtSignal
-from cross__efficient__vit.vision_transformer import visionTransformerPredict, visionTransformerTrain
+from cross__efficient__vit.cross__efficient__vit.vision_transformer import visionTransformerPredict, visionTransformerTrain
 from CNN.predict import inference
 import os
 import shutil
@@ -14,7 +14,7 @@ from database import db_functions
 import hashlib
 import binascii
 from PyQt5.QtGui import QRegExpValidator
-import icons_rc
+from ui import icons_rc
 
 class TrainThread(QThread):
     trainCompleted = pyqtSignal(dict)

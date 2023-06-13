@@ -186,4 +186,4 @@ class Ui_UserRegister(object):
         self.line_edit_mail.setPlaceholderText(_translate("Dialog", "Mail"))
         self.push_button_cikis.setText(_translate("Dialog", "Çıkış"))
         self.push_button_geri.setText(_translate("Dialog", "Geri"))
-import icons_rc
+from ui import icons_rc

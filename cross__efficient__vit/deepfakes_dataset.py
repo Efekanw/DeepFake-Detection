@@ -8,7 +8,7 @@ from albumentations import Compose, RandomBrightnessContrast, \
     HorizontalFlip, FancyPCA, HueSaturationValue, OneOf, ToGray, \
     ShiftScaleRotate, ImageCompression, PadIfNeeded, GaussNoise, GaussianBlur, Rotate
 
-from transforms.albu import IsotropicResize
+from cross__efficient__vit.transforms.albu import IsotropicResize
 
 class DeepFakesDataset(Dataset):
     def __init__(self, images, labels, image_size, mode = 'train'):
