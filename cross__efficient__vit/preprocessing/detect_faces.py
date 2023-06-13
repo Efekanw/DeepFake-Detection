@@ -5,10 +5,10 @@ import torch
 from torch.utils.data.dataloader import DataLoader
 from tqdm import tqdm
 
-import face_detector
-from face_detector import VideoDataset
-from preprocessing.face_detector import VideoFaceDetector
-from preprocessing.utils import get_video_paths, get_method
+from cross__efficient__vit.preprocessing import face_detector
+from cross__efficient__vit.preprocessing.face_detector import VideoDataset
+from cross__efficient__vit.preprocessing.face_detector import VideoFaceDetector
+from cross__efficient__vit.preprocessing.utils import get_video_paths, get_method
 import argparse
 
 def collate_fn_temp(x):

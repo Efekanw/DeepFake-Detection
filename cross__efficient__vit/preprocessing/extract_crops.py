@@ -17,7 +17,7 @@ cv2.ocl.setUseOpenCL(False)
 cv2.setNumThreads(0)
 from tqdm import tqdm
 
-from preprocessing.utils import get_video_paths, get_method, get_method_from_name
+from cross__efficient__vit.preprocessing.utils import get_video_paths, get_method, get_method_from_name
 
 
 def extract_video(video, dataset, data_path, output_path):

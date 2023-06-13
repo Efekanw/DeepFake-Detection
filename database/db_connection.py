@@ -1,4 +1,6 @@
 import psycopg2
+
+
 def connect(dbname, user, password):
     try:
         print("Connecting to database...")

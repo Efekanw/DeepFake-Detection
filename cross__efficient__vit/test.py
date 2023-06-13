@@ -20,8 +20,8 @@ from sklearn.metrics import f1_score
 from tqdm import tqdm
 
 from cross__efficient__vit.cross_efficient_vit import CrossEfficientViT
-from transforms.albu import IsotropicResize
-from utils import custom_round, custom_video_round
+from cross__efficient__vit.transforms.albu import IsotropicResize
+from cross__efficient__vit.utils import custom_round, custom_video_round
 
 #########################
 ####### CONSTANTS #######

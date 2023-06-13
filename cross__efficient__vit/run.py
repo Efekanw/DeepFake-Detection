@@ -3,8 +3,8 @@ import yaml
 import torch
 from cross__efficient__vit.cross_efficient_vit import CrossEfficientViT
 import numpy as np
-from utils import custom_video_round
-from test import read_frames
+from cross__efficient__vit.utils import custom_video_round
+from cross__efficient__vit.test import read_frames
 
 RUN_DIR = "run_test/run_folder"
 batch_size = 32
