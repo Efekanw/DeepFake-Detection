@@ -1,6 +1,6 @@
 import cv2
 from albumentations import Compose, PadIfNeeded
-from transforms.albu import IsotropicResize
+from cross__efficient__vit.transforms.albu import IsotropicResize
 import numpy as np
 import os
 import cv2

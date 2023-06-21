@@ -1,8 +1,8 @@
 import os
 import re
 import torch
-from kernel_utils import VideoReader, FaceExtractor, confident_strategy, predict_on_video
-from training.zoo.classifiers import DeepFakeClassifier
+from CNN.kernel_utils import VideoReader, FaceExtractor, confident_strategy, predict_on_video
+from CNN.training.zoo.classifiers import DeepFakeClassifier
 
 
 def inference(video_path):

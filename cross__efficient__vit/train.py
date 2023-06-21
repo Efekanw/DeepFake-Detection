@@ -12,20 +12,19 @@ from multiprocessing.pool import Pool
 from functools import partial
 from multiprocessing import Manager
 from progress.bar import ChargingBar
-from cross_efficient_vit import CrossEfficientViT
+from cross__efficient__vit.cross_efficient_vit import CrossEfficientViT
 import uuid
 from torch.utils.data import DataLoader, TensorDataset, Dataset
 from sklearn.metrics import accuracy_score
 import cv2
-from transforms.albu import IsotropicResize
 import glob
 import pandas as pd
 from tqdm import tqdm
-from utils import get_method, check_correct, resize, shuffle_dataset, get_n_params
+from cross__efficient__vit.utils import get_method, check_correct, resize, shuffle_dataset, get_n_params
 from sklearn.utils.class_weight import compute_class_weight 
 from torch.optim import lr_scheduler
 import collections
-from deepfakes_dataset import DeepFakesDataset
+from cross__efficient__vit.deepfakes_dataset import DeepFakesDataset
 import math
 import yaml
 import argparse
@@ -348,12 +347,13 @@ def main(num_epochs, config, training_params, model_name, patience=5, resume="cr
             previous_loss = total_val_loss
             result_str = "#" + str(t) + "/" + str(num_epochs) + " loss:" + str(total_loss) + " accuracy:" + str(train_correct) +" val_loss:" + str(total_val_loss) + " val_accuracy:" + str(val_correct) + " val_0s:" + str(val_negative) + "/" + str(np.count_nonzero(validation_labels == 0)) + " val_1s:" + str(val_positive) + "/" + str(np.count_nonzero(validation_labels == 1))
             print(result_str)
-
-
+            model_base_name = model_name.split('.')[0]
+            global MODELS_PATH
+            MODELS_PATH += '/' + model_base_name
             if not os.path.exists(MODELS_PATH):
                 os.makedirs(MODELS_PATH)
-            torch.save(model.state_dict(), os.path.join(MODELS_PATH,  "efficientnet_checkpoint" + str(t) + "_" + model_name))
-            return os.path.join(MODELS_PATH,  "efficientnet_checkpoint" + str(t) + "_" + model_name)
+            torch.save(model.state_dict(), os.path.join(MODELS_PATH, model_name))
+            return os.path.join(MODELS_PATH, model_name)
         except Exception as e:
             print(e)
 

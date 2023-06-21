@@ -2,19 +2,21 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtMultimedia import *
 from PyQt5.QtMultimediaWidgets import *
-from facedetection_ui import Ui_DeepFakeDetection
+from ui.facedetection_ui import Ui_DeepFakeDetection
 from ui.user_login_ui import Ui_UserLogin
 from ui.user_register_ui import Ui_UserRegister
 from PyQt5.QtCore import QThread, pyqtSignal
-from cross__efficient__vit.vision_transformer import visionTransformerPredict, visionTransformerTrain
+from cross__efficient__vit.cross__efficient__vit.vision_transformer import visionTransformerPredict, visionTransformerTrain
 from CNN.predict import inference
 import os
 import shutil
 from database import db_functions
 import hashlib
 import binascii
-from PyQt5.QtGui import QRegExpValidator
-import icons_rc
+from PyQt5.QtGui import QRegExpValidator, QImage, QPixmap
+import pathlib
+import time
+import ui.icons_rc
 
 class TrainThread(QThread):
     trainCompleted = pyqtSignal(dict)
@@ -30,16 +32,24 @@ class TrainThread(QThread):
         self.train_path = None
         self.val_path = None
         self.test_path = None
+        self.userid = None
+        self.connection = None
 
     def run(self):
         try:
-            result_test = visionTransformerTrain(num_epochs=self.num_epochs, training_params=self.training_params, model_name=self.model_name, train_path=self.train_path, val_path=self.val_path, test_path=self.test_path)
+            result_test = visionTransformerTrain(num_epochs=self.num_epochs, training_params=self.training_params, model_name=self.model_name, train_path=self.train_path, val_path=self.val_path, test_path=self.test_path, userid=self.userid)
+            metric_id = db_functions.get_id_by_metric_name(self.connection, result_test["metric_name"])
+            conf_image = db_functions.retrieve_conf_image(self.connection, metric_id)
+            roc_image = db_functions.retrieve_roc_image(self.connection, metric_id)
+            result_test["conf_image"] = conf_image
+            result_test["roc_image"] = roc_image
         except:
             print("train_test")
         self.trainCompleted.emit(result_test)
 
 
 class InferenceThread(QThread):
+    finished = pyqtSignal(float)
     inferenceCompleted = pyqtSignal(dict)
     progressUpdate = pyqtSignal(int)
 
@@ -67,6 +77,7 @@ class InferenceThread(QThread):
 
     def run(self):
         try:
+            start_time = time.time()
             result_dict = {}
             result_str = ''
             model_cnn_result = -1
@@ -101,8 +112,11 @@ class InferenceThread(QThread):
             else:
                 return 0
             result_dict = {"result": result_str, "cnn": model_cnn_result, "vt": float(model_vt_result)}
+            end_time = time.time()
+            total_time = end_time - start_time
         except:
             print("run")
+        print(total_time)
         self.inferenceCompleted.emit(result_dict)
 
 
@@ -124,13 +138,21 @@ class LoginWindow(QMainWindow):
             print(password)
             userid = db_functions.check_login(self.connection, username, password)
             print(userid)
-            self.window_main = MainWindow(self.connection)
+            self.window_main = MainWindow(self.connection, userid)
             if userid != False:
                 if self.window_main.isVisible():
                     self.window_main.hide()
                 else:
                     self.close()
                     self.window_main.show()
+            else:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Warning)
+                msgBox.setWindowTitle("Hata")
+                msgBox.setText("Kullanıcı Adı, Parola Hatalı")
+                msgBox.setDefaultButton(QMessageBox.Ok)
+                msgBox.exec()
+
         except:
             print("login error")
 
@@ -219,11 +241,12 @@ class RegisterWindow(QMainWindow):
 
 class MainWindow(QMainWindow):
 
-    def __init__(self, connection):
+    def __init__(self, connection, userid):
         super().__init__()
         self.ui = Ui_DeepFakeDetection()
         self.ui.setupUi(self)
         self.connection = connection
+        self.userid = userid
         #self.show()
         self.setup()
         self.makeConnections()
@@ -237,13 +260,28 @@ class MainWindow(QMainWindow):
         self.val_path = ''
         self.test_path = ''
 
+
     def showTrainResult(self, result_test):
         self.ui.labelAccuracySonuc.clear()
         self.ui.labelLossSonuc.clear()
         self.ui.labelF1ScoreSonuc.clear()
-        self.ui.labelAccuracySonuc.setText(result_test["accuracy"])
-        self.ui.labelLossSonuc.setText(result_test["loss"])
-        self.ui.labelF1ScoreSonuc.setText(result_test["f1"])
+        self.ui.label_roc.clear()
+        self.ui.label_conf.clear()
+        self.ui.labelAccuracySonuc.setText(str(result_test["accuracy"]))
+        self.ui.labelLossSonuc.setText(str(result_test["loss"]))
+        self.ui.labelF1ScoreSonuc.setText(str(result_test["f1"]))
+        try:
+            qimage = QImage.fromData(result_test["conf_image"])
+            pixmap = QPixmap.fromImage(qimage)
+            self.ui.label_conf.setPixmap(pixmap)
+            self.ui.label_conf.setScaledContents(True)
+            qimage2 = QImage.fromData(result_test["roc_image"])
+            pixmap2 = QPixmap.fromImage(qimage2)
+            self.ui.label_roc.setPixmap(pixmap2)
+            self.ui.label_roc.setScaledContents(True)
+            #self.ui.labelConfisionMatrix = result_test["conf_image"]
+        except Exception as e:
+            print(e)
 
     def updateProgressBar(self, value):
         self.ui.progressBarVisionTransformer.setValue(value)
@@ -270,13 +308,38 @@ class MainWindow(QMainWindow):
         self.ui.pushButtonOynat.clicked.connect(self.mediaPlayer.play)
         self.ui.pushButtonDuraklat.clicked.connect(self.mediaPlayer.pause)
         self.ui.pushButtonDurdur.clicked.connect(self.mediaPlayer.stop)
-        #self.ui.pushButtonInference.clicked.connect(self.inference)
         self.ui.pushButtonInference.clicked.connect(self.runInference)
-        #self.ui.actionVeri_seti_sec.triggered.connect(self.onActionTrainAc)
-        self.ui.actionTraining_veriseti_sec.triggered.connect(self.onActionTrainAc)
-        self.ui.actionValidation_veriseti_sec.triggered.connect(self.onActionValAc)
-        self.ui.actionTest_veriseti_sec.triggered.connect(self.onActionTestAc)
+        self.ui.pushButton_Egitim_veriseti.clicked.connect(self.onActionTrainAc)
+        self.ui.pushButton_Validation_veriseti.clicked.connect(self.onActionValAc)
+        self.ui.pushButton_Test_veriseti.clicked.connect(self.onActionTestAc)
         self.ui.pushButtonEgitim.clicked.connect(self.runTrain)
+        self.ui.pushButton_labelUpload.clicked.connect(self.onActionLabelAc)
+
+    def onActionLabelAc(self):
+        path = QFileDialog.getExistingDirectory(self, "Etiket Dosyalarını Seç", "/")
+        print(path)
+        path = pathlib.Path(path)
+        file_list = os.listdir(path)
+        #target_folder = "/run"
+        pwd = pathlib.Path.absolute(pathlib.Path(os.path.dirname(__file__))).parent
+        target_folder = pathlib.Path.joinpath(pwd, 'run')
+        #target_folder = pwd +  '/run'
+        # Her bir dosya ve dizin için kopyalama işlemi yapılır
+        for file_name in file_list:
+            source_path = pathlib.Path.joinpath(path, file_name)
+            #source_path = path + '/' + file_name
+            #target_path = target_folder + '/' + file_name
+            target_path = pathlib.Path.joinpath(target_folder, file_name)
+
+            # Eğer kaynak öğe bir dosya ise, hedef klasöre kopyalanır
+            if os.path.isfile(source_path):
+                shutil.copy2(source_path, target_path)
+                print(f"{source_path} dosyası kopyalandı.")
+
+            # Eğer kaynak öğe bir klasör ise, hedef klasöre rekurzif olarak kopyalanır
+            elif os.path.isdir(source_path):
+                shutil.copytree(source_path, target_path)
+                print(f"{source_path} klasörü ve içeriği kopyalandı.")
 
     def onActionTestAc(self):
         path = QFileDialog.getExistingDirectory(self, "Test Veri Seti Seç", "/")
@@ -353,18 +416,25 @@ class MainWindow(QMainWindow):
         #self.ui.labelResult.setText(result)
         result_fake = ''
         result_real = ''
+        self.ui.labelFake_result.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.ui.labelReal_result.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.ui.labelFake.setStyleSheet("background-color: rgb(4, 18, 27);color: red; border: 2px solid;color: rgb(255, 0, 0);padding: 5px;border-radius: 10px;border-color: red;")
         self.ui.labelReal.setStyleSheet("background-color: rgb(4, 18, 27);color: green; border: 2px solid;padding: 5px;color: rgb(0, 170, 0);border-radius: 10px;opacity: 200;border-color: green;")
 
         if result_dict["cnn"] >= 0.5 and result_dict["cnn"] != float(-1):
-            result_fake += "CNN -> %{0:0.3f}\n".format(result_dict["cnn"])
+            result_dict["cnn"] = (result_dict["cnn"] * 100)
+            result_fake += "CNN -> %{0:0.2f}\n".format(result_dict["cnn"])
         elif result_dict["cnn"] != float(-1):
-            result_real += "CNN -> %{0:0.3f}\n".format(result_dict["cnn"])
+            result_dict["cnn"] = 100 - (result_dict["cnn"] * 100)
+            result_dict["vt"] = (result_dict["vt"] * 100)
+            result_real += "CNN -> %{0:0.2f}\n".format(result_dict["cnn"])
 
         if result_dict["vt"] >= 0.5 and result_dict["vt"] != float(-1):
-            result_fake += "ViT -> %{0:0.3f}\n".format(result_dict["vt"])
+            result_dict["vt"] = (result_dict["vt"] * 100)
+            result_fake += "ViT -> %{0:0.2f}\n".format(result_dict["vt"])
         elif result_dict["vt"] != float(-1):
-            result_real += "ViT -> %{0:0.3f}\n".format(result_dict["vt"])
+            result_dict["vt"] = 100 - (result_dict["vt"] * 100)
+            result_real += "ViT -> %{0:0.2f}\n".format(result_dict["vt"])
 
         if result_fake != '':
             self.ui.labelFake_result.setText(result_fake)
@@ -378,19 +448,86 @@ class MainWindow(QMainWindow):
         else:
             self.ui.labelReal.setStyleSheet("background-color: green;color: white;")
 
-
     def runTrain(self):
-        self.trainThread.model_name = self.ui.lineEditModelName.text() + '.pth'
-        self.trainThread.num_epochs = int(self.ui.lineEditEpochViT.text())
-        self.trainThread.patience = int(self.ui.lineEditPatienceViT.text())
-        training_params = {"bs": int(self.ui.lineEditBatchViT.text()),
-                           "lr": float(self.ui.lineEditLearningRateViT.text()),
-                           "weight_decay": float(self.ui.lineEditWeightDecayViT.text()),
-                           "gamma": float(self.ui.lineEditGamaViT.text()),
-                           "step_size": int(self.ui.lineEditStepSizeViT.text())
-                           }
-        self.trainThread.training_params = training_params
-        self.trainThread.train_path = self.train_path
-        self.trainThread.val_path = self.val_path
-        self.trainThread.test_path = self.test_path
-        self.trainThread.start()
+        flag = 1
+        msg = ''
+        if self.train_path == '':
+            msg = "Eğitim Veri Kümesi Seçiniz"
+            flag = 0
+        if self.val_path == '':
+            msg = "Doğrulama Veri Kümesi Seçiniz"
+            flag = 0
+        if self.test_path == '':
+            msg = "Test Veri Kümesi Seçiniz"
+            flag = 0
+        if (self.ui.lineEditEpochViT.text() == '' or self.ui.lineEditLearningRateViT.text() == '' or
+            self.ui.lineEditPatienceViT.text() == '' or self.ui.lineEditGamaViT.text() == '' or
+            self.ui.lineEditBatchViT.text() == '' or  self.ui.lineEditStepSizeViT.text() == '' or
+            self.ui.lineEditWeightDecayViT.text() == '' or self.ui.lineEditModelName.text() == ''):
+            msg = "Model parametreleri boş olmamalıdır."
+            flag = 0
+        else:
+            if float(self.ui.lineEditEpochViT.text()).is_integer():
+                if int(self.ui.lineEditEpochViT.text()) <= 0:
+                    msg = "Epoch değeri 0'dan büyük  olmalıdır"
+                    flag = 0
+            else:
+                msg = "Epoch değeri tam sayı olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditLearningRateViT.text()) <= 0 or float(self.ui.lineEditLearningRateViT.text()) >=  1:
+                msg = "Learning Rate değeri 0 il 1 arasında olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditPatienceViT.text()).is_integer():
+                if int(self.ui.lineEditPatienceViT.text()) <= 0:
+                    msg = "Patience değeri 0'dan büyük tam sayı olmalıdır"
+                    flag = 0
+            else:
+                msg = "Patience değeri tam sayı olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditGamaViT.text()) <= 0 or float(self.ui.lineEditGamaViT.text()) >=  1:
+                msg = "Gamma değeri 0 ile 1 arasında olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditBatchViT.text()).is_integer():
+                if int(self.ui.lineEditBatchViT.text()) <= 0:
+                    msg = "Batch size değeri 0'dan büyük tam sayı olmalıdır"
+                    flag = 0
+            else:
+                msg = "Batch size değeri tam sayı olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditStepSizeViT.text()).is_integer():
+                if int(self.ui.lineEditStepSizeViT.text()) <= 0:
+                    msg = "Step size değeri 0'dan büyük tam sayı olmalıdır"
+                    flag = 0
+            else:
+                msg = "Step size değeri tam sayı olmalıdır"
+                flag = 0
+            if float(self.ui.lineEditWeightDecayViT.text()) <= 0 or float(self.ui.lineEditWeightDecayViT.text()) >=  1:
+                msg = "Weight Decay değeri 0 ile 1 arasında olmalıdır"
+                flag = 0
+            if db_functions.check_metric_exists(self.connection, self.ui.lineEditModelName.text()):
+                msg = "Bu model isminde bir model zaten mevcut"
+                flag = 0
+        if flag == 1:
+            self.trainThread.model_name = self.ui.lineEditModelName.text() + '.pth'
+            self.trainThread.num_epochs = int(self.ui.lineEditEpochViT.text())
+            self.trainThread.patience = int(self.ui.lineEditPatienceViT.text())
+            training_params = {"bs": int(self.ui.lineEditBatchViT.text()),
+                               "lr": float(self.ui.lineEditLearningRateViT.text()),
+                               "weight_decay": float(self.ui.lineEditWeightDecayViT.text()),
+                               "gamma": float(self.ui.lineEditGamaViT.text()),
+                               "step_size": int(self.ui.lineEditStepSizeViT.text())
+                               }
+            self.trainThread.training_params = training_params
+            self.trainThread.train_path = self.train_path
+            self.trainThread.val_path = self.val_path
+            self.trainThread.test_path = self.test_path
+            self.trainThread.start()
+            self.trainThread.userid = self.userid
+            self.trainThread.connection = self.connection
+        else:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Warning)
+            msgBox.setWindowTitle("Hata")
+            msgBox.setText(msg)
+            msgBox.setDefaultButton(QMessageBox.Ok)
+            msgBox.exec()
