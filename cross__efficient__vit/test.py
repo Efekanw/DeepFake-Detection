@@ -23,7 +23,9 @@ from tqdm import tqdm
 from cross__efficient__vit.cross_efficient_vit import CrossEfficientViT
 from cross__efficient__vit.transforms.albu import IsotropicResize
 from cross__efficient__vit.utils import custom_round, custom_video_round
+
 from database import db_functions, db_connection
+
 #########################
 ####### CONSTANTS #######
 #########################

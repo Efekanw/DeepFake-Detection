@@ -145,6 +145,7 @@ class Ui_UserLogin(object):
 import ui.icons_rc
 
 
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
