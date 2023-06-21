@@ -56,11 +56,10 @@ QMenuBar#menubar:hover{
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(4, 18, 27);
-color: rgb(255, 255, 255);
-border-color:NONE;
-color: rgb(2, 10, 16);
+     <string notr="true">color: rgb(255, 255, 255);
+border-radius: 10px;
 opacity: 200;
+border-color: rgb(65, 199, 199);
 </string>
     </property>
     <property name="currentIndex">
@@ -102,18 +101,16 @@ border-radius:20px;
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>580</y>
+         <y>590</y>
          <width>281</width>
-         <height>111</height>
+         <height>131</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
+        <string notr="true">color:rgb(89, 184, 148);
 border: 2px solid;
-padding: 5px;
-border-radius: 10px;
 opacity: 200;
-border-color: rgb(65, 199, 199);
+border-color: rgb(89, 184, 148);
 </string>
        </property>
        <property name="widgetResizable">
@@ -124,15 +121,15 @@ border-color: rgb(65, 199, 199);
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>267</width>
-          <height>97</height>
+          <width>277</width>
+          <height>127</height>
          </rect>
         </property>
         <widget class="QCheckBox" name="check_box_vision_transformer">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>10</y>
+           <y>30</y>
            <width>191</width>
            <height>31</height>
           </rect>
@@ -147,7 +144,12 @@ border-color: rgb(65, 199, 199);
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+          <string notr="true">color:rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+opacity: 200;
+border-color: rgb(89, 184, 148);
+</string>
          </property>
          <property name="text">
           <string>Conv. Cross ViT EfficientNet B0</string>
@@ -157,7 +159,7 @@ border-color: rgb(65, 199, 199);
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>50</y>
+           <y>70</y>
            <width>131</width>
            <height>31</height>
           </rect>
@@ -166,7 +168,12 @@ border-color: rgb(65, 199, 199);
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+          <string notr="true">color:rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+opacity: 200;
+border-color: rgb(89, 184, 148);
+</string>
          </property>
          <property name="text">
           <string>Selim EfficientNet B7</string>
@@ -257,7 +264,8 @@ border: 2px solid;
 padding: 5px;
 border-radius: 10px;
 opacity: 200;
-border-color: rgb(65, 199, 199);</string>
+border-color: rgb(65, 199, 199);
+background-color: rgb(4, 18, 27);</string>
         </property>
         <property name="text">
          <string>OYNAT</string>
@@ -350,7 +358,7 @@ opacity: 200;
 border-color: rgb(65, 199, 199);</string>
         </property>
         <property name="text">
-         <string>Çıkarım</string>
+         <string>ÇIKARIM</string>
         </property>
        </widget>
       </widget>
@@ -359,7 +367,7 @@ border-color: rgb(65, 199, 199);</string>
         <rect>
          <x>540</x>
          <y>490</y>
-         <width>361</width>
+         <width>341</width>
          <height>291</height>
         </rect>
        </property>
@@ -379,9 +387,16 @@ border-color: rgb(65, 199, 199);</string>
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>51</width>
+          <width>91</width>
           <height>121</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -408,9 +423,16 @@ border-color: red;</string>
          <rect>
           <x>10</x>
           <y>160</y>
-          <width>51</width>
+          <width>91</width>
           <height>121</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -433,207 +455,65 @@ border-color: green;</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="labelFake1">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>10</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-color: rgb(255, 255, 255);
-padding: 5px;
-border-radius: 10px;
-border-color: red;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelFake2">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>10</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-color: rgb(255, 255, 255);
-padding: 5px;
-border-radius: 10px;
-border-color: red;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelFake3">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>80</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-color: rgb(255, 255, 255);
-padding: 5px;
-border-radius: 10px;
-border-color: red;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelFake4">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>80</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-color: rgb(255, 255, 255);
-padding: 5px;
-border-radius: 10px;
-border-color: red;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelReal1">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>170</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-padding: 5px;
-color: rgb(0, 170, 0);
-border-radius: 10px;
-opacity: 200;
-border-color: green;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelReal2">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>170</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-padding: 5px;
-color: rgb(0, 170, 0);
-border-radius: 10px;
-opacity: 200;
-border-color: green;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelReal3">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>230</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-padding: 5px;
-color: rgb(0, 170, 0);
-border-radius: 10px;
-opacity: 200;
-border-color: green;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelReal4">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>230</y>
-          <width>91</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border: 2px solid;
-padding: 5px;
-color: rgb(0, 170, 0);
-border-radius: 10px;
-opacity: 200;
-border-color: green;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
        <widget class="QLabel" name="labelFake_result">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>50</y>
-          <width>81</width>
-          <height>51</height>
+          <x>120</x>
+          <y>40</y>
+          <width>211</width>
+          <height>71</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(89, 184, 148);</string>
+        </property>
         <property name="text">
-         <string>ViT -&gt; %{0:0.3f}</string>
+         <string>Sahte Doğruluk Oranı</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
        </widget>
        <widget class="QLabel" name="labelReal_result">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>200</y>
-          <width>81</width>
-          <height>51</height>
+          <x>120</x>
+          <y>190</y>
+          <width>211</width>
+          <height>71</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>7</pointsize>
+          <pointsize>9</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(89, 184, 148);</string>
+        </property>
         <property name="text">
-         <string>CNN -&gt; %0.543</string>
+         <string>Gerçek Doğruluk Oranı</string>
         </property>
        </widget>
       </widget>
@@ -651,9 +531,9 @@ border-color: green;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
+        <y>20</y>
         <width>891</width>
-        <height>541</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="title">
@@ -663,7 +543,7 @@ border-color: green;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>70</y>
+         <y>120</y>
          <width>91</width>
          <height>21</height>
         </rect>
@@ -679,7 +559,7 @@ border-color: green;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>190</y>
+         <y>180</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -691,93 +571,11 @@ border-color: green;</string>
         <string>Patience</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="comboBoxModels">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>201</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-border: 2px solid;
-padding: 5px;
-border-radius: 5px;
-opacity: 200;
-border-color: rgb(65, 199, 199);</string>
-       </property>
-       <property name="currentText">
-        <string notr="true" comment="Model seç" extracomment="Model seç"/>
-       </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Conv. Cross ViT EfficientNet B0</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Selim EfficientNet B7</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QPushButton" name="pushButtonEgitim">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>460</y>
-         <width>81</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-border: 2px solid;
-padding: 5px;
-border-radius: 10px;
-opacity: 200;
-border-color: rgb(65, 199, 199);</string>
-       </property>
-       <property name="text">
-        <string>Eğitim</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelSeedSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>280</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Seed</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="labelBatchViT">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>110</y>
+         <x>320</x>
+         <y>120</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -789,27 +587,11 @@ border-color: rgb(65, 199, 199);</string>
         <string>Batch size</string>
        </property>
       </widget>
-      <widget class="QLabel" name="labelImageSizeSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>240</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Image Size</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="labelLearningRateViT">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>150</y>
+         <x>620</x>
+         <y>120</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -824,8 +606,8 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLabel" name="labelWeightDecayViT">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>230</y>
+         <x>320</x>
+         <y>180</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -840,8 +622,8 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLabel" name="labelGamaViT">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>270</y>
+         <x>620</x>
+         <y>180</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -857,7 +639,7 @@ border-color: rgb(65, 199, 199);</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>310</y>
+         <y>240</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -869,82 +651,20 @@ border-color: rgb(65, 199, 199);</string>
         <string>Step size</string>
        </property>
       </widget>
-      <widget class="QLabel" name="labelBatchSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>120</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Batch size</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelEpochSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>80</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Epoch</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelLearningRateSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>160</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Learning rate</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelFrameSelim">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>200</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Frame</string>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="lineEditEpochViT">
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>70</y>
+         <y>120</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-</string>
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>2</string>
@@ -954,14 +674,16 @@ border-color: rgb(65, 199, 199);</string>
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>190</y>
+         <y>180</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-</string>
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>5</string>
@@ -970,31 +692,37 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLineEdit" name="lineEditBatchViT">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>110</y>
+         <x>460</x>
+         <y>120</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);
 </string>
        </property>
        <property name="text">
-        <string>16</string>
+        <string>8</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEditLearningRateViT">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>150</y>
+         <x>760</x>
+         <y>120</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);
 </string>
        </property>
        <property name="text">
@@ -1004,31 +732,36 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLineEdit" name="lineEditWeightDecayViT">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>230</y>
+         <x>460</x>
+         <y>180</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-</string>
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>0000001</string>
+        <string>0.000001</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEditGamaViT">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>270</y>
+         <x>760</x>
+         <y>180</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);
 </string>
        </property>
        <property name="text">
@@ -1039,51 +772,6 @@ border-color: rgb(65, 199, 199);</string>
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>310</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
-       </property>
-       <property name="text">
-        <string>15</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditSeedSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>280</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditBatchSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>120</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditImageSizeSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
          <y>240</y>
          <width>121</width>
          <height>21</height>
@@ -1091,56 +779,19 @@ border-color: rgb(65, 199, 199);</string>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-</string>
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
        </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditEpochSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>80</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditFrameSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>200</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditLearningRateSelim">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>160</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-</string>
+       <property name="text">
+        <string>15</string>
        </property>
       </widget>
       <widget class="QLabel" name="labelModelName">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>350</y>
+         <x>320</x>
+         <y>240</y>
          <width>131</width>
          <height>21</height>
         </rect>
@@ -1155,29 +806,279 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLineEdit" name="lineEditModelName">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>350</y>
+         <x>460</x>
+         <y>240</y>
          <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-</string>
+border: 2px solid;
+opacity: 200;
+border-color:  rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>deneme</string>
+        <string>vit_01</string>
        </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_4">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>10</y>
+         <width>771</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#pushButton_labelUpload{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButton_labelUpload:hover{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButton_labelUpload:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color:rgba(105,118,132,200);
+}
+QPushButton#pushButton_Egitim_veriseti{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButton_Egitim_veriseti:hover{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButton_Egitim_veriseti:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color:rgba(105,118,132,200);
+}
+QPushButton#pushButton_Validation_veriseti{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButton_Validation_veriseti:hover{
+	background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButton_Validation_veriseti:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color:rgba(105,118,132,200);
+}
+QPushButton#pushButton_Test_veriseti{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButton_Test_veriseti:hover{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButton_Test_veriseti:pressed{
+    padding-left:5px;
+    padding-top:5px;
+    background-color:rgba(105,118,132,200);
+}
+border: 1px solid black;
+border-radius:5px;
+
+</string>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QPushButton" name="pushButton_Test_veriseti">
+        <property name="geometry">
+         <rect>
+          <x>570</x>
+          <y>20</y>
+          <width>171</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>TEST VERİ SETİ YÜKLE</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_Egitim_veriseti">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>20</y>
+          <width>171</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>EĞİTİM VERİ SETİ YÜKLE</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_Validation_veriseti">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>20</y>
+          <width>181</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>DOĞRULAMA VERİ SETİ YÜKLE</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_labelUpload">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>131</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>LABEL YÜKLE</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="geometry">
+        <rect>
+         <x>760</x>
+         <y>220</y>
+         <width>120</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#pushButtonEgitim{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20,47,78,219), stop:1 rgba(85,98,112,226));
+}
+QPushButton#pushButtonEgitim:hover{
+    background-color: qlineargradient(spread:pad, x:1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40,67,98,219), stop:1 rgba(105,118,132,226));
+}
+QPushButton#pushButtonEgitim:pressed{
+    padding-left:5px;
+    padding-top:5px;
+    background-color:rgba(105,118,132,200);
+}
+border: 1px solid black;
+border-radius:5px;</string>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QPushButton" name="pushButtonEgitim">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>121</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(65, 199, 199);</string>
+        </property>
+        <property name="text">
+         <string>EĞİTİM</string>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>570</y>
+        <y>340</y>
         <width>891</width>
-        <height>211</height>
+        <height>71</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-color:rgb(89, 184, 148)</string>
       </property>
       <property name="title">
        <string/>
@@ -1201,8 +1102,8 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLabel" name="labelF1Score">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>120</y>
+         <x>320</x>
+         <y>20</y>
          <width>91</width>
          <height>31</height>
         </rect>
@@ -1217,8 +1118,8 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLabel" name="labelLoss">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>120</y>
+         <x>620</x>
+         <y>20</y>
          <width>91</width>
          <height>31</height>
         </rect>
@@ -1233,8 +1134,8 @@ border-color: rgb(65, 199, 199);</string>
       <widget class="QLabel" name="labelRocCurves">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>20</y>
+         <x>780</x>
+         <y>290</y>
          <width>91</width>
          <height>31</height>
         </rect>
@@ -1246,29 +1147,13 @@ border-color: rgb(65, 199, 199);</string>
         <string>Roc curves</string>
        </property>
       </widget>
-      <widget class="QLabel" name="labelConfisionMatrix">
-       <property name="geometry">
-        <rect>
-         <x>570</x>
-         <y>20</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Confision Matrix</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="labelAccuracySonuc">
        <property name="enabled">
         <bool>true</bool>
        </property>
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>160</x>
          <y>20</y>
          <width>131</width>
          <height>31</height>
@@ -1285,7 +1170,7 @@ border: 2px solid;
 padding: 5px;
 border-radius: 10px;
 opacity: 200;
-border-color: rgb(65, 199, 199);</string>
+border-color: rgb(89, 184, 148);</string>
        </property>
        <property name="text">
         <string/>
@@ -1297,36 +1182,7 @@ border-color: rgb(65, 199, 199);</string>
        </property>
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>120</y>
-         <width>131</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>7</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-border: 2px solid;
-padding: 5px;
-border-radius: 10px;
-opacity: 200;
-border-color: rgb(65, 199, 199);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelRocCurvesSonuc">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>400</x>
+         <x>460</x>
          <y>20</y>
          <width>131</width>
          <height>31</height>
@@ -1343,7 +1199,7 @@ border: 2px solid;
 padding: 5px;
 border-radius: 10px;
 opacity: 200;
-border-color: rgb(65, 199, 199);</string>
+border-color: rgb(89, 184, 148);</string>
        </property>
        <property name="text">
         <string/>
@@ -1355,9 +1211,9 @@ border-color: rgb(65, 199, 199);</string>
        </property>
        <property name="geometry">
         <rect>
-         <x>400</x>
-         <y>120</y>
-         <width>131</width>
+         <x>760</x>
+         <y>20</y>
+         <width>121</width>
          <height>31</height>
         </rect>
        </property>
@@ -1372,10 +1228,109 @@ border: 2px solid;
 padding: 5px;
 border-radius: 10px;
 opacity: 200;
-border-color: rgb(65, 199, 199);</string>
+border-color: rgb(89, 184, 148);</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>891</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="labelRocCurves_2">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>10</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Roc curves</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_roc">
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>50</y>
+         <width>431</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(89, 184, 148);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_conf">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>431</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+border: 2px solid;
+padding: 5px;
+border-radius: 10px;
+opacity: 200;
+border-color: rgb(89, 184, 148);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelConfisionMatrix">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Confision Matrix</string>
        </property>
       </widget>
      </widget>
@@ -1398,10 +1353,6 @@ border-color: rgb(65, 199, 199);</string>
     </property>
     <addaction name="actionAc"/>
     <addaction name="actionKapat"/>
-    <addaction name="actionVeri_seti_sec"/>
-    <addaction name="actionTraining_veriseti_sec"/>
-    <addaction name="actionValidation_veriseti_sec"/>
-    <addaction name="actionTest_veriseti_sec"/>
    </widget>
    <addaction name="menuDosya"/>
   </widget>
@@ -1436,6 +1387,8 @@ border-color: rgb(65, 199, 199);</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../../Desktop/aa.qrc"/>
+ </resources>
  <connections/>
 </ui>

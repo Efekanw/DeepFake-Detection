@@ -1,3 +1,5 @@
+import os
+import cross__efficient__vit.preprocessing.detect_faces
 import sys
 from PyQt5.QtWidgets import QApplication
 from ui.DeepFake_UI_connection import LoginWindow, RegisterWindow
