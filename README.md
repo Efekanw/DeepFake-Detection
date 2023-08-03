@@ -1,6 +1,6 @@
 # DeepFake-Detection
 Deepfake detection application was developed to reveal whether deepfake videos are real or fake. For this purpose, Selim EfficientNet B7 https://github.com/selimsef/dfdc_deepfake_challenge  and Conv. Cross ViT EfficientNet B0 [https://github.com/davide-coccomini/Combining-EfficientNet-and-Vision-Transformers-for-Video-Deepfake-Detection] models were used. In addition to this feature, there is also a training tab for user-specific training of the Conv. Cross ViT EfficientNet B0 pretrained model.
-##Deepfake Detection Inference Screen
+## Deepfake Detection Inference Screen
 The user first uploads the video they want to test. Then, the model or models to be run are selected. As a result, the model or models make inferences. The inference result with the highest accuracy is presented to the user whether the video is real or fake. In addition, the percentage of reliability of the result of the model is presented to the user.
 
 ![image](https://github.com/Efekanw/DeepFake-Detection/assets/56073720/0c511283-0887-4932-be68-3f2fa3b07471)
